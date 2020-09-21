@@ -16,17 +16,16 @@ file_name = "./data/raw/Sara.txt"
 file_object = open(file_name, "r")
 
 #read the entire contents of file into a list
-line_string = file_object.readline()
+line_list = file_object.readlines()
+
+#close the file
+file_object.close()
 
 #pretend we read one line of data from the file
-while line_string:
-    if line_string[0] in ("#", "u"):  #skip lines that start with # and u
-         #move to the next line
-         line_string = file_object.readline()
-         continue
+for lineString in line_list:
+    if lineString[0] in ("#", "u"): continue  #skip lines that start with # and u
     #split the string into list of data items
-    lineData = line_string.split()
-    
+    lineData = lineString.split()
     #assign variable to specific items in list
     record_id = lineData[0]    #ARGOS tracking record ID
     obs_date = lineData[2]    #Observation date
@@ -34,11 +33,5 @@ while line_string:
     obs_lat = lineData[6]   #obs latitude
     obs_lon = lineData[7]   #obs longitude
 
-    #print location of sara
-    print(f"Record {record_id} indicates Sara was seen at {obs_lat}N and {obs_lon}W on {obs_date}")
-
-    #Read the next line
-    line_string = file_object.readline()
-    
-#close the file
-file_object.close()
+#print location of sara
+print(f"Record {record_id} indicates Sara was seen at {obs_lat}N and {obs_lon}W on {obs_date}")
