@@ -22,17 +22,16 @@ line_list = file_object.readlines()
 file_object.close()
 
 #pretend we read one line of data from the file
-lineString = line_list[100]
-
-#split the string into list of data items
-lineData = lineString.split()
-
-#assign variable to specific items in list
-record_id = lineData[0]    #ARGOS tracking record ID
-obs_date = lineData[2]    #Observation date
-obs_lc = lineData[4]    #observation location class
-obs_lat = lineData[6]   #obs latitude
-obs_lon = lineData[7]   #obs longitude
+for lineString in line_list:
+    if lineString[0] in ("#", "u"): continue  #skip lines that start with # and u
+    #split the string into list of data items
+    lineData = lineString.split()
+    #assign variable to specific items in list
+    record_id = lineData[0]    #ARGOS tracking record ID
+    obs_date = lineData[2]    #Observation date
+    obs_lc = lineData[4]    #observation location class
+    obs_lat = lineData[6]   #obs latitude
+    obs_lon = lineData[7]   #obs longitude
 
 #print location of sara
 print(f"Record {record_id} indicates Sara was seen at {obs_lat}N and {obs_lon}W on {obs_date}")
